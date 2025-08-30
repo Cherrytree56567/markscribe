@@ -8,7 +8,7 @@ import (
 )
 
 func wakatimeData() (WakatimeUserStats, error) {
-	req, err := http.NewRequest(http.MethodGet, wakatimeClient.baseurl+"/users/current/stats/last_7_days", nil)
+	req, err := http.NewRequest(http.MethodGet, wakatimeClient.baseurl+"/users/my/stats/last_7_days", nil)
 	if err != nil {
 		return WakatimeUserStats{}, err // Return empty struct and error
 	}
