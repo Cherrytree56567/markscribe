@@ -8,7 +8,17 @@ import (
 )
 
 func wakatimeData() (WakatimeUserStats, error) {
-	req, err := http.NewRequest(http.MethodGet, wakatimeClient.baseurl+"/users/my/stats/last_7_days", nil)
+	endDate := time.Now()
+    startDate := endDate.AddDate(0, 0, -6) // includes today + 6 days back
+
+    // Format dates as YYYY-MM-DD
+    start := startDate.Format("2006-01-02")
+    end := endDate.Format("2006-01-02")
+
+    // Build URL with query params
+    url := fmt.Sprintf("%s/users/current/stats?start_date=%s&end_date=%s", wakatimeClient.baseurl, start, end)
+	
+	req, err := http.NewRequest(http.MethodGet, url, nil)
 	if err != nil {
 		return WakatimeUserStats{}, err // Return empty struct and error
 	}
