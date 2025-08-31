@@ -17,6 +17,7 @@ func wakatimeData() (WakatimeUserStats, error) {
 
     // Build URL with query params
     url := fmt.Sprintf("%s/users/current/stats?start_date=%s&end_date=%s", wakatimeClient.baseurl, start, end)
+	fmt.Println(url)
 	
 	req, err := http.NewRequest(http.MethodGet, url, nil)
 	if err != nil {
@@ -25,7 +26,7 @@ func wakatimeData() (WakatimeUserStats, error) {
 
 	// Set headers
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("Authorization", fmt.Sprintf("Basic %s", wakatimeClient.apikey))
+	req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", wakatimeClient.apikey))
 
 	client := &http.Client{}
 	resp, err := client.Do(req)
