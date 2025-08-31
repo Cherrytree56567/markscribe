@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/http"
 	"strings"
+	"time"
 )
 
 func wakatimeData() (WakatimeUserStats, error) {
@@ -16,7 +17,7 @@ func wakatimeData() (WakatimeUserStats, error) {
     end := endDate.Format("2006-01-02")
 
     // Build URL with query params
-    url := fmt.Sprintf("%s/users/current/stats?start_date=%s&end_date=%s", wakatimeClient.baseurl, start, end)
+    url := fmt.Sprintf("%s/users/my/stats?start_date=%s&end_date=%s", wakatimeClient.baseurl, start, end)
 	fmt.Println(url)
 	
 	req, err := http.NewRequest(http.MethodGet, url, nil)
